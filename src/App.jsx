@@ -3,6 +3,8 @@ import './App.css'
 import UserService from './services/user.services.js'
 import { useEffect, useState, } from 'react'
 import {login, logout} from "./store/Authslice.js"
+import Loading from './components/loaders/Loading.jsx'
+import Header from './components/root/Header.jsx'
 
 
 function App() {
@@ -25,8 +27,11 @@ useEffect(()=>{
 }, [])
 
   return !loading ? (
-   <div className='bg-blue-950 text-white p-4 rounded-2xl'>A fullstack blog app</div>
-  ) : <h1>Loading...</h1>
+   <div >
+      <Header/>
+    
+    </div>
+  ) : <Loading/>
 
   
 }

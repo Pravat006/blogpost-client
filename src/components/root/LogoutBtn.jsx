@@ -11,7 +11,6 @@ function LogoutBtn() {
             dispatch(logout())
         })
     }
-
     
   return (
     <button  className="block py-3 px-4 font-medium text-center text-white bg-[#e62222] hover:bg-red-500 active:bg-red-500 active:shadow-none rounded-lg shadow md:inline"
@@ -23,8 +22,4 @@ function LogoutBtn() {
         </button>
   )
 }
-//e62222
 export default LogoutBtn
-
-
-

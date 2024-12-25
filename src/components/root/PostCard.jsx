@@ -1,5 +1,5 @@
 import React from 'react'
-import PostService from "../../services/post.services.js"
+//import PostService from "../../services/post.services.js"
 import { Link } from 'react-router-dom'
 
 function PostCard({
@@ -10,28 +10,35 @@ function PostCard({
     image,
     date,
     //likes,
-    author
+    //author:{
+    //    fullname,
+    //    avatar
+    //}
 }) {
+
+    //React.useEffect(()=>{
+
+    //},[])
 
 
     return (
         <Link
-            to={`/posts/${id}`}
+            to={`/posts//${id}`}
             className="card">
             <article className="max-w-md mx-auto mt-4 shadow-lg border rounded-md duration-300 hover:shadow-sm" >
                 
                     <img src={image} loading="lazy" alt={title} className="w-full h-48 rounded-t-md" />
                     <div className="flex items-center mt-2 pt-3 ml-4 mr-2">
-                        <div className="flex-none w-10 h-10 rounded-full">
+                        {/*<div className="flex-none w-10 h-10 rounded-full">
                             <img 
                             src=
-                            {author}
+                            {author.avatar}
                             className="w-full h-full rounded-full" alt={author} />
-                        </div>
+                        </div>*/}
                         <div className="ml-3">
-                            <span className="block text-gray-900">
-                                {author}
-                            </span>
+                            {/*<span className="block text-gray-900">
+                                {author.fullname}
+                            </span>*/}
                             <span className="block text-gray-400 text-sm">{date}</span>
 
                         </div>

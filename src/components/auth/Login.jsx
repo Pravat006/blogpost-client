@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {  Link, useNavigate } from "react-router-dom";
 import { login as authLogin } from "../../store/Authslice.js";
 import Button from "../root/Button.jsx";
 import Input from "../root/Input.jsx";
 import { useDispatch } from "react-redux";
 import AuthService from "../../services/auth.services.js";
-import UserService from "../../services/user.services.js";
+//import UserService from "../../services/user.services.js";
 import { useForm } from "react-hook-form";
 import logo from "../../assets/Logo.png";
 
@@ -16,14 +16,16 @@ function Login() {
   const [error, setError] = useState();
 
   const login = async (data) => {
+
+    
     setError(" ");
     try {
-      const session = await AuthService.login(data);
-      if (session) {
-        const userData = await UserService.getUser();
-        if (userData) {
-          dispatch(authLogin(userData));
-        }
+      const res = await AuthService.login(data);
+      if (res.success) {
+        
+          dispatch(authLogin(res.data.user));
+          console.log(res.data.user)
+       
         navigate("/");
       }
     } catch (error) {
@@ -51,7 +53,7 @@ function Login() {
         </div>
       </div>
       <form onSubmit={handleSubmit(login)} className="mt-8 space-y-5">
-        <div>
+       
           {/* input */}
           <Input
             label="Email"
@@ -67,8 +69,7 @@ function Login() {
               },
             })}
           />
-        </div>
-        <div>
+       
           {/* input */}
           <Input
             label="Password"
@@ -78,7 +79,7 @@ function Login() {
               required: true,
             })}
           />
-        </div>
+     
 
         {/* button */}
         <Button type="submit" text="Login" />

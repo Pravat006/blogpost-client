@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import logo from "../../assets/Logo.png"
-import { useNavigate, Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import LogoutBtn from "./LogoutBtn.jsx"
 
 function Header() {
@@ -15,7 +15,6 @@ function Header() {
       path: "/",
       active: true
     },
-
     {
       title: "Add Post",
       path: "/add-post",
@@ -23,8 +22,8 @@ function Header() {
     },
     
     {
-      title: "Your Posts",
-      path: "/your-post",
+      title: "All Posts",
+      path: "/all-post",
       active: authStatus
     },
     
@@ -99,7 +98,7 @@ function Header() {
                     </Link>
                   </li>
                   <li>
-                    <Link to={"/sign-up"} className="block py-3 px-4 font-medium text-center text-white bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 active:shadow-none rounded-lg shadow md:inline">
+                    <Link to={'/sign-up'} className="block py-3 px-4 font-medium text-center text-white bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 active:shadow-none rounded-lg shadow md:inline">
                       Sign up
                     </Link>
                   </li>

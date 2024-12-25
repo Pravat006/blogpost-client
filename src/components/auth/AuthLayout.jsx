@@ -1,34 +1,46 @@
-import Loading from "../loaders/Loading.jsx" 
+import Loading from "../loaders/Loading.jsx"
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-
+import { login, logout } from "../../store/Authslice.js"
+import { Outlet, useNavigate } from 'react-router-dom'
+import Header from "../root/Header.jsx"
+import Footer from "../root/Footer.jsx"
+import userServices from "../../services/user.services.js"
+import { useDispatch } from "react-redux"
 
 export default function AuthLayout(
-  { children, authentication = true }) {
+ ) {
 
   const navigate = useNavigate()
   const [loader, setLoader] = useState(true)
-  const authStatus = useSelector((state) => state.auth.status)
-    useEffect(()=>{
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+
+    userServices.getUser().then((res)=>{
+        if(res){
+          dispatch(login(res))
+          navigate('/')
+        }else{
+          dispatch(logout())
+          navigate('/login')
+        }
+    }).finally(()=> setLoader(false) )
 
 
-      // true && true!==true(false) ----> false
-      // true && false!==true(true) ----> true ----> navigate to login page
-        if(authentication && authStatus !== authentication){
-          navigate("/login")
-        }
-        // false && true !== true(false) ----> false ---> navigate to "/"
-        // false && false !== true(true)  -----> false 
-        else if(!authentication && authStatus !== authentication){
-            navigate("/")
-        }
-          setLoader(false)
-    },[authStatus, navigate, authentication])
+  }, [])
 
   return (
 
-    loader ? <Loading/> : <>{children}</>
+    loader ? <Loading /> : (
+
+
+      <div lassName='min-h-screen flex flex-wrap content-between bg-white rounded-md'>
+        <div className="w-full block" >
+          <Header/>
+          <Outlet/>
+          <Footer/>
+        </div>
+      </div>)
 
   )
 }

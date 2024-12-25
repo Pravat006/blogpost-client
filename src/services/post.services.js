@@ -4,9 +4,9 @@ class PostService {
   async publishPost() {
     return await Axios.post("/posts/publishPost", data);
   }
-  async getAllPost(page, limit) {
-    //return await Axios.get(`/posts/?page=${page}&limit=${limit}`);
-    return await Axios.get(`/posts/`);
+  async getAllPost(page,limit) {
+    return await Axios.get(`/posts/?page=${page}&limit=${limit}`);
+    //return await Axios.get(`/posts/`);
   }
   async getPostById(postId) {
     return await Axios.get(`/posts/getPost/${postId}`);

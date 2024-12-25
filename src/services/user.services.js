@@ -2,7 +2,7 @@ import Axios from '../config/httpMethods.js'
 
 class UserService{
     async getUser(){
-        return await Axios.get('/users/get-CurrentUser')
+        return await Axios.get('/users/current-user')
     };
     async changePassword(data){
         return await Axios.patch('/users/change-password', data)

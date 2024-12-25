@@ -6,10 +6,11 @@ import {logout} from "../../store/Authslice.js"
 
 function LogoutBtn() {
      const dispatch = useDispatch()
-    const logoutHandler=()=>{
-        AuthService.logout().then(()=>{
+    const logoutHandler=async()=>{
+        await AuthService.logout().then(()=>{
             dispatch(logout())
         })
+        
     }
     
   return (

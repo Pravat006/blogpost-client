@@ -2,7 +2,13 @@ import React from 'react'
 
 function HomePage() {
   return (
-    <div>HomePage</div>
+
+
+  <main className="container mx-auto mt-8 text-center">
+    <div>Hpme page</div>
+  </main>
+
+
   )
 }
 

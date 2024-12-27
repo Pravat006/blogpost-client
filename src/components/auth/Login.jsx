@@ -12,7 +12,12 @@ import logo from "../../assets/Logo.png";
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm({
+    defaultValues:{
+        email:"",
+        password:""
+    }
+  });
   const [error, setError] = useState();
 
   const login = async (data) => {
@@ -23,9 +28,8 @@ function Login() {
       const res = await AuthService.login(data);
       if (res.success) {
         
-          dispatch(authLogin(res.data.user));
-          console.log(res.data.user)
-       
+          dispatch(authLogin(res.data));
+          //console.log(res)
         navigate("/");
       }
     } catch (error) {
@@ -34,14 +38,14 @@ function Login() {
   };
 
   return (
-    <div className="max-w-sm w-full text-gray-600">
+    <div className="max-w-sm w-full text-gray-600 backdrop-blur-sm p-4">
       <div className="text-center">
         <img src={logo} width={150} className="mx-auto" />
         <div className="mt-5 space-y-2">
           <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">
             Log in to your account
           </h3>
-          <p className="">
+          <p className="text-black">
             Don't have an account?{" "}
             <Link
               to={"/sign-up"}
@@ -52,7 +56,7 @@ function Login() {
           </p>
         </div>
       </div>
-      <form onSubmit={handleSubmit(login)} className="mt-8 space-y-5">
+      <form onSubmit={handleSubmit(login)} className="mt-8 space-y-5 bg-white p-9 sm:rounded-lg">
        
           {/* input */}
           <Input

@@ -9,7 +9,7 @@ class PostService {
     //return await Axios.get(`/posts/`);
   }
   async getPostById(postId) {
-    return await Axios.get(`/posts/getPost/${postId}`);
+    return await Axios.get(`/posts/getPost/:${postId}`);
   }
   async deletePost(postId) {
     return await Axios.delete(`/posts/${postId}`);

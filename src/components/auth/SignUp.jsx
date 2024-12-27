@@ -15,16 +15,28 @@ function SignUp() {
   const navigate = useNavigate()
   const [error, setError] = useState("")
   const dispatch = useDispatch()
-  const { register, handleSubmit } = useForm()
+
+
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      fullname: "",
+      email: "",
+      password: "",
+      avatar: "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
+
+    }
+  })
 
   const createAccount = async (data) => {
     try {
       const userData = await AuthService.register(data)
-      if (userData) {
-        const currentUserData = await UserService.getUser()
-        if (currentUserData) dispatch(authLogin(userData));
-        navigate("/")
+      if (userData.success) {
+        //const currentUserData = await UserService.getUser()
 
+        dispatch(authLogin(userData.data))
+        console.log(userData)
+        navigate("/")
+        alert("user successfully registered")
       }
     } catch (error) {
       setError(error.message)
@@ -34,15 +46,15 @@ function SignUp() {
 
 
   return (
-    <div className="w-full space-y-6 text-gray-600 sm:max-w-md">
+    <div className="w-full space-y-6 text-gray-600 sm:max-w-md backdrop-blur-sm p-4 ">
       <div className="text-center">
         <img src={logo} width={150} className="mx-auto" />
         <div className="mt-5 space-y-2">
           <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">Create an account</h3>
-          <p className="">Already have an account? <Link to={"/login"} className="font-medium text-indigo-600 hover:text-indigo-500">Log in</Link></p>
+          <p className="text-black">Already have an account? <Link to={"/login"} className="font-medium text-indigo-600 hover:text-indigo-500">Log in</Link></p>
         </div>
       </div>
-      <div className="bg-white shadow p-4 py-6 sm:p-6 sm:rounded-lg">
+      <div className="bg-white shadow p-4 py-6 sm:p-6 sm:rounded-lg mx-6 ">
         <form
           onSubmit={handleSubmit(createAccount())}
           className="space-y-5"

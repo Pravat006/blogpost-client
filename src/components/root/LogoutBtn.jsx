@@ -3,13 +3,16 @@ import { useDispatch } from 'react-redux'
 // AuthService for server update  and logout for state update
 import AuthService from "../../services/auth.services.js"
 import {logout} from "../../store/Authslice.js"
+import { useSession } from '../../config/session.js'
 
 function LogoutBtn() {
      const dispatch = useDispatch()
+    const {destroySession }= useSession()
+
     const logoutHandler=async()=>{
         await AuthService.logout().then(()=>{
             dispatch(logout())
-        })
+        }).then(()=> destroySession())
         
     }
     
